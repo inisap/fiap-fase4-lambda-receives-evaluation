@@ -32,7 +32,7 @@ class AvaliacaoResourceTest {
                 .contentType(ContentType.JSON)
                 .body(request)
                 .when()
-                .post("/avaliacao")
+                .post("/avaliacoes")
                 .then()
                 .statusCode(201)
                 .body("status", equalTo("AVALIACAO_REGISTRADA"));
