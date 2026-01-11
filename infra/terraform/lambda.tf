@@ -18,6 +18,18 @@ resource "aws_lambda_function" "avaliacao" {
     variables = {
       DYNAMODB_TABLE = data.terraform_remote_state.infra.outputs.dynamodb_avaliacoes_name
       SNS_TOPIC_ARN  = aws_sns_topic.avaliacoes_criticas.arn
+
+      #Cognito
+      QUARKUS_OIDC_AUTH_SERVER_URL = "https://cognito-idp.us-east-1.amazonaws.com/${aws_cognito_user_pool.avaliacao_pool.id}"
+      QUARKUS_OIDC_CLIENT_ID       = aws_cognito_user_pool_client.avaliacao_client.id
     }
   }
+}
+
+resource "aws_lambda_permission" "api_gateway" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.avaliacao.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.avaliacao_api.execution_arn}/*/*"
 }
