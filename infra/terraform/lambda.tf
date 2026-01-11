@@ -9,7 +9,7 @@ resource "aws_lambda_function" "avaliacao" {
   architectures = ["x86_64"]
 
   s3_bucket = data.terraform_remote_state.infra.outputs.artifacts_bucket_name
-  s3_key    = "avaliacao/v0.0.3/function.zip"
+  s3_key    = "avaliacao/v0.0.1/function.zip"
 
   memory_size = 512
   timeout     = 10
