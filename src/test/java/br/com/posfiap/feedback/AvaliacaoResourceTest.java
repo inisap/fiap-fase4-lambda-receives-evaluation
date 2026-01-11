@@ -4,6 +4,8 @@ import br.com.posfiap.feedback.dto.AvaliacaoRequest;
 import br.com.posfiap.feedback.service.AvaliacaoService;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+
+import io.quarkus.test.security.TestSecurity;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +22,7 @@ class AvaliacaoResourceTest {
     AvaliacaoService avaliacaoService;
 
     @Test
+    @TestSecurity(user = "aluno_teste", roles = {"ALUNO"})
     void deveRegistrarAvaliacaoComSucesso() {
 
         AvaliacaoRequest request =
