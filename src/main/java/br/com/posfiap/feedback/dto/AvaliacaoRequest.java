@@ -12,4 +12,12 @@ public class AvaliacaoRequest {
     @Min(0)
     @Max(10)
     public int nota;
+
+    public AvaliacaoRequest() {
+    }
+
+    public AvaliacaoRequest(String descricao, int nota) {
+        this.descricao = descricao;
+        this.nota = nota;
+    }
 }
